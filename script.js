@@ -1,29 +1,29 @@
-const getSumBtn = document.createElement("button");
-getSumBtn.append("Get Total Price");
-document.body.appendChild(getSumBtn);
+const btn = document.createElement("button");
+    btn.textContent = "Get Total Price";
+    document.body.appendChild(btn);
 
-const getSum = () => {
-  // Select all elements with class "price"
-  const prices = document.querySelectorAll(".price");
+    // Jab button pe click ho, ye function chalega
+    btn.onclick = function () {
+      let total = 0;
 
-  // Calculate the total sum
-  let total = 0;
-  prices.forEach(price => {
-    total += Number(price.textContent.trim());
-  });
+      // Saare price elements ko lo
+      const prices = document.querySelectorAll(".price");
 
-  // Create a new row
-  const newRow = document.createElement("tr");
+      // Har price ko number mein convert karke total mein jodo
+      for (let i = 0; i < prices.length; i++) {
+        total += Number(prices[i].textContent);
+      }
 
-  // Create a new cell with id="ans"
-  const newCell = document.createElement("td");
-  newCell.setAttribute("colspan", "2");
-  newCell.setAttribute("id", "ans");
-  newCell.textContent = total;
+      // New row banao
+      const row = document.createElement("tr");
 
-  // Append cell to row, and row to table
-  newRow.appendChild(newCell);
-  document.querySelector("table").appendChild(newRow);
-};
+      // Ek single cell banao, jisme total ho
+      const cell = document.createElement("td");
+      cell.colSpan = 2; // dono columns ko span kare
+      cell.id = "ans";  // test cases ke liye id set karo
+      cell.textContent = total;
 
-getSumBtn.addEventListener("click", getSum);
+      // Row mein cell jodo, table mein row jodo
+      row.appendChild(cell);
+      document.querySelector("table").appendChild(row);
+    };
